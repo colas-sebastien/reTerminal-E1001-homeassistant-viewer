@@ -9,7 +9,7 @@
 #include "config.h"
 #include "Utils.h"
 
-const char *VERSION = "1.0.0";
+const char *VERSION = "1.0.1";
 
 MyUtils utils(&Serial1);
 
@@ -34,8 +34,8 @@ bool WSConnected = false;
 uint32_t disconnectionTime=0;
 
 const uint32_t refresh_ms=100;
-const uint32_t max_disconnection_time= 1000*60*2/refresh_ms; // 2 minutes
-const uint32_t max_uptime    = 1000*20/refresh_ms;           // 20 seconds up before deep sleep
+const uint32_t max_uptime    = 1000*20/refresh_ms;            // 20 seconds up before deep sleep
+const uint32_t max_disconnection_time= 1000*60*2;             // 2 minutes
 
 uint32_t refresh_step=0;
 bool redraw=false;
@@ -344,6 +344,11 @@ void loop() {
     updateE1001Data();
     reTerminal.mainMenu(stationData);
     redraw=false;
+    updateData1=false;
+    updateData2=false;
+    updateData3=false;
+    updateData4=false;
+    updateData6=false;
   }
 
   if (max_uptime < refresh_step)

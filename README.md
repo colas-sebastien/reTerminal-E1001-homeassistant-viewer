@@ -66,6 +66,9 @@ The files must be BMP 2bit color, here is how to create one thanks to Gimp:
 
 ![photo](images/hav_2.jpg)
 
+## Release Notes
+- 1.0.1: Bug patch: Deep sleep when no network
+
 ## TODO
 - When device is refresh if right.left button is pressed display another screen like temperature graph...
 - Detect weather alerts and display

@@ -10,6 +10,7 @@ MyUtils::MyUtils(HardwareSerial *output)
 
 bool MyUtils::wifi_start(const bool AccessPoint,const char *ssid,const char *password,InputEvent event, uint32_t timeout)
 {
+  uint8_t delay_ms=10;
   bool active=true;
   event(active);
   if (AccessPoint)
@@ -31,15 +32,14 @@ bool MyUtils::wifi_start(const bool AccessPoint,const char *ssid,const char *pas
     log->println(ssid);    
     while (!WiFi.isConnected())
     {      
-        delay(10);
+        delay(delay_ms);
         count++;
-        if(count>=20)
+        if(count%20==0)
         {
-          count=0;
           active=!active;
           event(active);
         }
-        if ((timeout!=0) && (count*10>timeout))
+        if ((timeout!=0) && (count>timeout/delay_ms))
         {
           log->println("Can't connect: timeout"); 
           return false;
